@@ -28,18 +28,22 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void adminRegister(Admin admin) {
 		//Save the admin in the database
+		adminRepository1.save(admin);
 	}
 
 	@Override
 	public Admin updatePassword(Integer adminId, String password) {
 		//Update the password of admin with given id
-
+		Admin admin = adminRepository1.findById(adminId).get();
+		admin.setPassword(password);
+		adminRepository1.save(admin);
+		return admin;
 	}
 
 	@Override
 	public void deleteAdmin(int adminId){
 		// Delete admin without using deleteById function
-
+		adminRepository1.deleteById(adminId);
 	}
 
 	@Override
